@@ -88,6 +88,8 @@ class Breakout:
         self.__lives += 1
 
     def reset(self):
-        pass
+        self.__lives = GameConstants.START_LIVES
+        self.__score = 0
+        self.__level.load(0)
 
 Breakout().start()
