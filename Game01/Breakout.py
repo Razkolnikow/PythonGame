@@ -63,7 +63,7 @@ class Breakout:
     def getScore(self):
         return self.__score
 
-    def increaseScrore(self, score):
+    def increaseScore(self, score):
         self.__score += score
 
     def getLives(self):
