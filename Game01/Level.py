@@ -1,6 +1,7 @@
 import os
 import fileinput
 import pygame
+import random
 
 from Game01.Bricks import *
 from Game01.Shared.GameConstants import GameConstants
@@ -23,6 +24,41 @@ class Level:
 
     def loadNextLevel(self):
         pass
+
+    def loadRandom(self):
+        self.__bricks = []
+
+        x, y = 0, 0
+
+        maxBricks = int(GameConstants.SCREEN_SIZE[0] / GameConstants.BRICK_SIZE[0])
+        rows = random.randint(2, 8)
+
+        amountOfSpecialBricks = 0
+
+        for row in range(0, rows):
+            for brick in range(0, maxBricks):
+                brickType = random.randint(0, 3)
+                if brickType == 1 or amountOfSpecialBricks >= 2:
+                    brick = Brick([x, y], pygame.image.load(GameConstants.SPRITE_BRICK), self.__game)
+                    self.__bricks.append(brick)
+                    self.__amountOfBricksLeft += 1
+
+                elif brickType == 2:
+                    brick = SpeedBrick([x, y], pygame.image.load(GameConstants.SPRITE_SPEED_BRICK), self.__game)
+                    self.__bricks.append(brick)
+                    self.__amountOfBricksLeft += 1
+                    amountOfSpecialBricks += 1
+
+                elif brickType == 3:
+                    brick = SpeedBrick([x, y], pygame.image.load(GameConstants.SPRITE_LIFE_BRICK), self.__game)
+                    self.__bricks.append(brick)
+                    self.__amountOfBricksLeft += 1
+                    amountOfSpecialBricks += 1
+
+                x += GameConstants.BRICK_SIZE[0]
+
+            x = 0
+            y += GameConstants.BRICK_SIZE[1]
 
     def load(self, level):
         self.__currentLevel = level
