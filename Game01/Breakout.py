@@ -39,7 +39,14 @@ class Breakout:
 
         self.__currentScene = 0
 
-        self.__sounds = ()
+        self.__sounds = (
+            pygame.mixer.Sound(GameConstants.SOUND_FILE_GAMEOVER),
+            pygame.mixer.Sound(GameConstants.SOUND_FILE_HIT_BRICK),
+            pygame.mixer.Sound(GameConstants.SOUND_FILE_HIT_BRICK_LIFE),
+            pygame.mixer.Sound(GameConstants.SOUND_FILE_HIT_BRICK_SPEED),
+            pygame.mixer.Sound(GameConstants.SOUND_FILE_HIT_WALL),
+            pygame.mixer.Sound(GameConstants.SOUND_FILE_HIT_PAD)
+        )
 
     def start(self):
         while 1:

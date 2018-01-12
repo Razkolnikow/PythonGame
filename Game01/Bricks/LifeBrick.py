@@ -1,4 +1,5 @@
 from Game01.Bricks import Brick
+from Game01.Shared.GameConstants import *
 
 
 class LifeBrick(Brick):
@@ -10,3 +11,6 @@ class LifeBrick(Brick):
         game.increaseLives()
 
         super(LifeBrick, self).hit()
+
+    def getHitSound(self):
+        return GameConstants.SOUND_HIT_BRICK_LIFE
