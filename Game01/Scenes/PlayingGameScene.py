@@ -11,18 +11,27 @@ class PlayingGameScene(Scene):
         super(PlayingGameScene, self).render()
 
         game = self.getGame()
+        level = game.getLevel()
+        balls = game.getBalls()
+
+        if level.getAmountOfBricks() <= 0:
+            for ball in balls:
+                ball.setMotion(0)
+
+            level.loadNextLevel()
 
         if game.getLives() <= 0:
             game.playSound(GameConstants.SOUND_GAMEOVER)
             game.changeScene(GameConstants.GAMEOVER_SCENE)
 
         pad = game.getPad()
-        for ball in game.getBalls():
+        for ball in balls:
 
             for brick in game.getLevel().getBricks():
                 if ball.intersects(brick) and not brick.isDestroyed():
                     game.playSound(brick.getHitSound())
                     brick.hit()
+                    level.brickHit()
                     game.increaseScore(brick.getHitPoints())
                     ball.changeDirection(brick)
                     break

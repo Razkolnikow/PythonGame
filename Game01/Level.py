@@ -23,7 +23,13 @@ class Level:
         self.__amountOfBricksLeft -= 1
 
     def loadNextLevel(self):
-        pass
+        self.__currentLevel += 1
+        filename = os.path.join("Assets", "Levels", "level" + str(self.__currentLevel) + ".dat")
+
+        if not os.path.exists(filename):
+            self.loadRandom()
+        else:
+            self.load(self.__currentLevel)
 
     def loadRandom(self):
         self.__bricks = []
